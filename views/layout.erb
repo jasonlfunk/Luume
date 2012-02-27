@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Luume: Project Management</title>
+		<link href='/css/site.css' rel='stylesheet'>
+		<link href='/css/bootstrap.min.css' rel='stylesheet'>
+		<link href='/css/bootstrap-responsive.min.css' rel='stylesheet'>
+	</head>
+	<body data-spy="scroll" data-target=".subnav" data-offset="50" data-twttr-rendered="true">
+		<%= partial(:'common/navbar',:locals => {:title=>title||=""})%>
+		<div class="container" style="margin-top: 60px;">
+			<div class="row">
+				<!--Body content-->
+				<% if defined? user %>
+					Welcome <%=user%>, <a href='/logout'>Logout</a><br/>
+				<% end %>
+				<% if !title.empty? %>
+					<div class="page-header">
+						<h1><%=title%></h1>
+					</div>
+				<% end %>
+			</div>
+			<% unless !defined? infos || infos.nil? || infos.empty? %>
+				<% infos.each do |name,info| %>
+					<% unless name.to_s =~ /^_/ %> 
+						<div class="alert alert-info">
+							<%=info%>
+						</div>
+					<% end %>
+				<% end %>	
+			<% end %>
+			<% unless !defined? successes || successes.nil? || successes.empty? %>
+				<% successes.each do |name,success| %>
+					<% unless name.to_s =~ /^_/ %> 
+						<div class="alert alert-success">
+							<%=success%>
+						</div>
+					<% end %>
+				<% end %>	
+			<% end %>
+			<% unless !defined? errors || errors.nil? || errors.empty? %>
+				<% errors.each do |name,error| %>
+					<% unless name.to_s =~ /^_/ %> 
+						<div class="alert alert-error">
+							<%=error%>
+						</div>
+					<% end %>
+				<% end %>	
+			<% end %>
+			<%= yield %>
+		</div>
+		<!-- Script Inclusion -->
+		<script src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js'></script> 
+		<script src='/js/bootstrap.min.js'></script>
+		<script src='/js/site.js'></script>
+	</body>
+</html>

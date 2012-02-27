@@ -1,0 +1,38 @@
+<div class="row">
+	<% if clients.count > 0 %>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Email Address</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% clients.each do |client| %>
+				<tr>
+					<td><%= client[:name] %></td>
+					<td><%= client[:email] %></td>
+					<td>
+						<a class="btn btn-info" href="/clients/<%= client[:client_id] %>">View</a>
+						<a class="btn btn-danger" href="/clients/delete/<%= client[:client_id] %>">Delete</a>
+					</td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	<% end %>
+</div>
+<div class="row">
+	<form method="post" class="form-horizontal">
+		<fieldset>
+			<legend data-toggle="collapse" data-target="#create" style="cursor: pointer;">Add A New Client</legend>
+			<div id="create" class="collapse <% unless errors.empty? %>in<% end %>" style="padding-top:10px;">
+				<%= _text({:name=>"name",:label=>"Client's Name",:placeholder=>"Name",:value=>values[:name],:error=>errors[:_name]}) %>
+				<%= _text({:name=>"email",:label=>"Client's Email",:placeholder=>"Email",:value=>values[:email],:error=>errors[:_email]}) %>
+				<%= _textarea({:name=>"comments",:label=>"Additional Comments",:placeholder=>"Comments",:value=>values[:comments]}) %>
+				<%= _button({:text=>"Create Client",:type=>"submit",:class=>"btn-success"}) %>
+			</div>
+		</fieldset>
+	</form>
+</div>

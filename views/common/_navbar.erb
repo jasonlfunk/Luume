@@ -1,0 +1,30 @@
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</a>
+			<a class="brand" href="/">Luume</a>
+			<div class="nav-collapse">
+				<ul class="nav">
+					<li <% if title=="Projects"%> class="active" <% end %>> 
+						<a href="/projects">
+							<i class="<% if title=="Projects"%>icon-white<% end %> icon-th-large"></i> Projects
+						</a>
+					</li>	
+					<li <% if title=="Clients"%> class="active" <% end %>> 
+						<a href="/clients">
+							<i class="<% if title=="Clients"%>icon-white<% end %> icon-user"></i> Clients 
+						</a>	
+					</li>
+					<li <% if title=="Invoices"%> class="active" <% end %>> 
+						<a href="/invoices">
+							<i class="<% if title=="Invoices"%>icon-white<% end %> icon-list-alt"></i> Invoices 
+						</a>
+					</li>
+				</div>
+			</div>
+		</div>
+	</div>

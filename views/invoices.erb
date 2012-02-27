@@ -1,0 +1,27 @@
+<% if invoices.count > 0 %>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Invoice Name</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% invoices.each do |invoice| %>
+			<tr>
+				<td><%= invoice[:name] %></td>
+				<td><a class="btn btn-danger" href="/invoices/delete/<%= invoice[:invoice_id] %>">Delete</a></td>
+			</tr>
+		  <% end %>
+		</tbody>
+	</table>
+<% else %>	
+	No Invoices Found!
+<% end %>
+<h2>Add A New Invoice</h2>
+<form method="post">
+	<input type="text" name="name" placeholder="Invoice Name"/><br/>
+	<input type="text" name="email" placeholder="Invoice Email"/><br/>
+	<textarea name="comments" placeholder="Comments"></textarea><br/>
+	<button type="submit" class="btn">Create Invoice</button>
+</form>

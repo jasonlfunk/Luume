@@ -1,0 +1,15 @@
+How to install:
+
+  1) Install MySQL For Ruby:
+    http://tmtm.org/en/mysql/ruby/
+
+  2) Install MySQL dbi
+    sudo gem install dbi dbd-mysql
+
+  3) Install sanatra
+    sudo gem install sanatra
+
+Database Schema:
+
+  CREATE TABLE clients(client_id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255), email VARCHAR(255), comments TEXT);
+  CREATE TABLE projects(projecT_id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255);

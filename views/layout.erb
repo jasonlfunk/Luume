@@ -20,15 +20,6 @@
 					</div>
 				<% end %>
 			</div>
-			<% unless !defined? infos || infos.nil? || infos.empty? %>
-				<% infos.each do |name,info| %>
-					<% unless name.to_s =~ /^_/ %> 
-						<div class="alert alert-info">
-							<%=info%>
-						</div>
-					<% end %>
-				<% end %>	
-			<% end %>
 			<% unless !defined? successes || successes.nil? || successes.empty? %>
 				<% successes.each do |name,success| %>
 					<% unless name.to_s =~ /^_/ %> 
@@ -43,6 +34,15 @@
 					<% unless name.to_s =~ /^_/ %> 
 						<div class="alert alert-error">
 							<%=error%>
+						</div>
+					<% end %>
+				<% end %>	
+			<% end %>
+			<% unless !defined? infos || infos.nil? || infos.empty? %>
+				<% infos.each do |name,info| %>
+					<% unless name.to_s =~ /^_/ %> 
+						<div class="alert alert-info">
+							<%=info%>
 						</div>
 					<% end %>
 				<% end %>	

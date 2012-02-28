@@ -1,7 +1,7 @@
 helpers do
 	def _text(args)
 		'<div class="control-group'+(args[:error] ? ' error' : '' )+'">
-			<label class="control-label" for="'+args[:name]+'">'+args[:label]+'</label>
+			<label class="control-label" for="'+args[:name]+'">'+args[:label]+(args[:required]?'<sup>*</sup>':'')+'</label>
 			<div class="controls">
 				<input type="text" class="input-xlarge" id="'+args[:name]+'" name="'+args[:name]+'"
 				'+(args[:placeholder] ? 'placeholder="'+args[:placeholder]+'"':'')+'
@@ -14,7 +14,7 @@ helpers do
 	end
 	def _textarea(args)
 		'<div class="control-group'+(args[:error] ? ' error' : '')+'">
-			<label class="control-label" for="'+args[:name]+'">'+args[:label]+'</label>
+			<label class="control-label" for="'+args[:name]+'">'+args[:label]+(args[:required]?'<sup>*</sup>':'')+'</label>
 			<div class="controls">
 				<textarea class="input-xlarge" id="'+args[:name]+'" name="'+args[:name]+'"
 				'+(args[:placeholder] ? 'placeholder="'+args[:placeholder]+'"':'')+'

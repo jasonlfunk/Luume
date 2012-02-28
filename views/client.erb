@@ -1,0 +1,21 @@
+<div class="row">
+	<div class="page-header">
+		<h1><%=client[:name]%></h1>
+	</div>
+	<form class="form-horizontal" method="post" action="/client/update/<%=client[:client_id]%>">
+		<%= _text({:required=>1,:name=>"name",:label=>"Client's Name",:placeholder=>"Name",:value=>values[:name].nil? ? client[:name] : values[:name],:error=>errors[:_name]}) %>
+		<%= _text({:required=>1,:name=>"email",:label=>"Client's Email",:placeholder=>"Email",:value=>values[:email].nil? ? client[:email] : values[:email],:error=>errors[:_email]}) %>
+		<%= _textarea({:name=>"comments",:label=>"Additional Comments",:placeholder=>"Comments",:value=>values[:comments].nil? ? client[:comments] : values[:comments]}) %>
+		<%= _button({:text=>"Update Client Information",:type=>"submit",:class=>"btn-success"}) %>
+	</form>
+</div>
+<div class="row">
+	<div class="page-header">
+		<h2>Projects</h2>
+	</div>
+</div>
+<div class="row">
+	<div class="page-header">
+		<h2>Invoices</h2>
+	</div>
+</div>

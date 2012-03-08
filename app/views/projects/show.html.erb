@@ -1,34 +1,18 @@
-<h1>Project</h1>
+<h1> <%= @project.name %>&nbsp;<small><%= @project.start %> - <%= @project.finish%></small></h1> 
 
-<p>
-  <b>Name</b><br>
-  <%= @project.name %>
-</p>
-
-<p>
-  <b>Description</b><br>
-  <%= @project.description %>
-</p>
-
-<p>
-  <b>Begin</b><br>
-  <%= @project.begin %>
-</p>
-
-<p>
-  <b>Finish</b><br>
-  <%= @project.finish %>
-</p>
-
-<p>
-  <b>Rate</b><br>
-  <%= @project.rate %>
-</p>
-
-<p>
+<div class='span3'>
+  <%= image_tag @project.picture %> 
+</div>
+<div class='span6'>
   <b>Client</b><br>
-  <%= @project.client_id %>
-</p>
+  <%= link_to @project.client.name, client_path(@project.client) %><br/>
+  <b>Rate</b><br>
+  <%= number_to_currency(@project.rate) %>/hr<br/>
+  <b>Description</b><br/>
+  <%= @project.description %>
+</div>
+<div class="cb"/>
+<br/>
 
 <div class="form-actions">
   <%= link_to 'Back', projects_path, :class => 'btn'  %>

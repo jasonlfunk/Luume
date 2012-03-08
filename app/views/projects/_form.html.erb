@@ -12,21 +12,21 @@
     <div class="control-group">
       <%= f.label :description, :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_area :description, :class => 'text_area' %>
+        <%= f.text_area :description, :class => 'text_area', :rows => 5 %>
       </div>
     </div>
 
     <div class="control-group">
-      <%= f.label :begin, :class => 'control-label' %>
+      <%= f.label :start, :class => 'control-label' %>
       <div class="controls">
-        <%= f.datetime_select :begin, :class => 'datetime_select' %>
+        <%= f.date_select :start, :include_blank => 1 %>
       </div>
     </div>
 
     <div class="control-group">
       <%= f.label :finish, :class => 'control-label' %>
       <div class="controls">
-        <%= f.datetime_select :finish, :class => 'datetime_select' %>
+        <%= f.date_select :finish, :include_blank => 1 %>
       </div>
     </div>
 
@@ -40,7 +40,21 @@
     <div class="control-group">
       <%= f.label :client_id, :class => 'control-label' %>
       <div class="controls">
-        <%= f.number_field :client_id, :class => 'number_field' %>
+        <%= f.collection_select(:client_id,
+                                Client.all,
+                                :id,
+                                :name,
+                                { :prompt => true }) %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :picture, :class => 'control-label' %>
+      <div class="controls">
+        <% if @project.picture.file? %>
+          <%= image_tag @project.picture(:thumb) %><br/>
+        <% end %>
+        <%= f.file_field :picture %>
       </div>
     </div>
 

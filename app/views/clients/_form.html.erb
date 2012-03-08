@@ -40,6 +40,9 @@
     <div class="control-group">
       <%= f.label :picture, :class => 'control-label' %>
       <div class="controls">
+        <% if @client.picture.file? %>
+          <%= image_tag @client.picture(:thumb) %><br/>
+        <% end %>
         <%= f.file_field :picture %>
       </div>
     </div>

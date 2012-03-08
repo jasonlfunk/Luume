@@ -1,0 +1,39 @@
+<h1> <%= @client.name %> <small><a href="mailto:<%= @client.email %>"><%= @client.email %></a></small></h1>
+
+<div class='span3'>
+  <% if @client.picture.file? %>
+    <%= image_tag @client.picture %> 
+  <% else %>
+    <%= image_tag "default/male.png" %>
+  <% end %> 
+</div>
+<div class='span3'>
+<% if @client.phone.length > 0 %>
+    <b>Phone</b><br/>
+    <%= @client.phone %><br/><br/>
+<% end %>
+<% if @client.address.length > 0 %>
+    <b>Address</b><br>
+    <%= simple_format(@client.address) %>
+<% end %>
+<% if @client.projects.length > 0 %>
+    <b>Projects</b><br>
+    <% @client.projects.each_with_index do |project,idx| %>
+      <%= link_to project.name,project_path(project) %><%= "," unless idx == @client.projects.length-1 %>
+    <% end %>
+<% end %>
+</div>
+
+<% if @client.comments.length > 0 %>
+<div class='span6'>
+  <b>Comments</b><br>
+  <%= @client.comments %>
+</div>
+<% end %>
+<div class="cb"/>
+<br/>
+<div class="form-actions">
+  <%= link_to 'Back', clients_path, :class => 'btn'  %>
+  <%= link_to 'Edit', edit_client_path(@client), :class => 'btn' %>
+  <%= link_to 'Delete', client_path(@client), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+</div>

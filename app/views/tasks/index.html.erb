@@ -1,0 +1,15 @@
+<div class="page-header"> 
+  <h1><%= @project.name.possessive %> Tasks <small>Those things you do</small></h1>
+</div>
+<% if @tasks.empty? %>
+<div class="alert alert-info">
+  You have not created any tasks for this project yet!
+</div>
+<% else %>
+
+<% end %>
+<div class="cb"></div><br/>
+<div class="form-actions">
+  <%= link_to 'Back', project_path(@project), :class => 'btn' %>
+  <%= link_to 'New Task', new_project_task_path(@project), :class => 'btn btn-info' %>
+</div>

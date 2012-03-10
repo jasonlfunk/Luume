@@ -38,16 +38,34 @@
           <a class="brand" href="/">Luume</a>
           <div class="container nav-collapse">
             <ul class="nav">
-              <li <% if current_page? clients_path %>class="active"<%end%>>
-              <%= link_to clients_path do %>
-                <i class='<% if current_page? clients_path %>icon-white<%end%> icon-user'></i> Clients
+              <% if logged_in? %>
+                <li <% if current_page? clients_path %>class="active"<%end%>>
+                <%= link_to clients_path do %>
+                  <i class='<% if current_page? clients_path %>icon-white<%end%> icon-user'></i> Clients
+                <% end %>
+                </li>
+                <li <% if current_page? projects_path %>class="active"<%end%>>
+                <%= link_to projects_path do %>
+                  <i class='<% if current_page? projects_path %>icon-white<%end%> icon-th-large'></i> Projects 
+                <% end %>
+                </li>
+                <li> 
+                <%= link_to logout_path do %>
+                  <i class='icon-off'></i> Log out 
+                <% end %>
+                </li>
+              <% else %>
+                <li> 
+                <%= link_to login_path do %>
+                  <i class='icon-ok'></i>Log in 
+                <% end %>
+                </li>
+                <li> 
+                <%= link_to signup_path do %>
+                  <i class='icon-arrow-up'></i>Sign Up 
+                <% end %>
+                </li>
               <% end %>
-              </li>
-              <li <% if current_page? projects_path %>class="active"<%end%>>
-              <%= link_to projects_path do %>
-                <i class='<% if current_page? projects_path %>icon-white<%end%> icon-th-large'></i> Projects 
-              <% end %>
-              </li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -56,6 +74,14 @@
 
     <div class="container">
       <div class="content">
+        <div class="row">
+          <% flash.each do |key, msg| %>
+            <div class="alert alert-<%= key %>">
+              <a class="close" data-dismiss="alert">×</a>
+              <%= msg %>
+            </div>
+          <% end %>
+        </div>
         <div class="row">
           <!--<div class="span12">-->
             <%= yield %>

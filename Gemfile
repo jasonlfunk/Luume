@@ -26,6 +26,8 @@ end
 gem 'jquery-rails'
 gem "paperclip", "~> 2.7"
 gem 'chronic' 
+gem "nifty-generators", :group => :development
+gem 'simple_form'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -41,3 +43,6 @@ gem 'chronic'
 
 # To use debugger
 # gem 'ruby-debug'
+gem "possessive"
+gem "mocha", :group => :test
+gem "bcrypt-ruby", :require => "bcrypt"

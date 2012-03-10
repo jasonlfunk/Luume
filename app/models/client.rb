@@ -4,5 +4,8 @@ class Client < ActiveRecord::Base
   has_attached_file :picture, 
                     :default_url => "/images/default/:style/client.png",
                     :styles => { :original => "256x256#", :thumb => "75x75#" }
+
   has_many :projects, :order => "name ASC"
+  belongs_to :user
+  validates_presence_of :user
 end

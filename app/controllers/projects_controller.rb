@@ -1,8 +1,9 @@
 class ProjectsController < ApplicationController
+  before_filter :login_required
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    @projects = @current_user.projects
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,10 +15,17 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @project = Project.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render :json => @project }
+   
+    if @project.client.user == @current_user 
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render :json => @project }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to projects_path, :notice => "Sorry, you don't have access to that project." }
+        format.json { render :status => 403 }
+      end
     end
   end
 
@@ -80,4 +88,5 @@ class ProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
 end

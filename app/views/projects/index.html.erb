@@ -1,11 +1,23 @@
-<h1>Projects<small style='padding-left: 10px;'><%= link_to 'New Project', new_project_path %></small></h1>
+<h1>Projects<% unless @current_user.clients.empty? %><small style='padding-left: 10px;'><%= link_to 'New Project', new_project_path %></small><%end%></h1>
 <br/>
-<% @projects.each do |project| %>
-  <div class='project span3'>
-      <%= link_to project_path(project) do %>
-        <%= image_tag project.picture %>
-      <% end %><br/>
-      <%= link_to project.name, project_path(project) %><br/>
+<% if @current_user.clients.empty? %>
+  <div class="alert alert-block alert-info">
+    <h4 class="alert-heading">No Clients Found!</h4>
+    It looks like you haven't created any clients yet! In order to create a project, you must first <a href='/clients/new'>create a client</a>.
   </div>
+<% elsif @projects.empty? %>
+  <div class="alert alert-block alert-info">
+    <h4 class="alert-heading">No Clients Found!</h4>
+    It looks like you haven't created any clients yet! Click on the "New Client" link above to get started.
+  </div>
+<% else %>
+   <% @projects.each do |project| %>
+    <div class='project span3'>
+        <%= link_to project_path(project) do %>
+          <%= image_tag project.picture %>
+        <% end %><br/>
+        <%= link_to project.name, project_path(project) %><br/>
+    </div>
+  <% end %>
 <% end %>
 <div class='cb'/>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120308194444) do
+ActiveRecord::Schema.define(:version => 20120310171120) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -24,7 +24,10 @@ ActiveRecord::Schema.define(:version => 20120308194444) do
     t.string   "picture_content_type"
     t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "clients", ["user_id"], :name => "index_clients_on_user_id"
 
   create_table "logs", :force => true do |t|
     t.datetime "start"
@@ -51,6 +54,15 @@ ActiveRecord::Schema.define(:version => 20120308194444) do
     t.datetime "picture_updated_at"
   end
 
+  create_table "roles", :force => true do |t|
+    t.string   "role"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "roles", ["user_id"], :name => "index_roles_on_user_id"
+
   create_table "tasks", :force => true do |t|
     t.string   "name"
     t.text     "description"
@@ -60,5 +72,13 @@ ActiveRecord::Schema.define(:version => 20120308194444) do
   end
 
   add_index "tasks", ["project_id"], :name => "index_tasks_on_project_id"
+
+  create_table "users", :force => true do |t|
+    t.string   "email"
+    t.string   "password_hash"
+    t.string   "password_salt"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
 end

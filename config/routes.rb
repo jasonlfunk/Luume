@@ -18,11 +18,10 @@ Luume::Application.routes.draw do
   
   resources :projects
 
-  resources :clients do
-    resources :projects do
-      resources :tasks do
-        resources :logs do
-        end
+  resources :clients
+  resources :projects do
+    resources :tasks do
+      resources :logs do
       end
     end
   end

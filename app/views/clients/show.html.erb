@@ -1,7 +1,10 @@
-<h1> <%= @client.name %> <small><a href="mailto:<%= @client.email %>"><%= @client.email %></a></small></h1>
-
+<div class="page-header"> 
+  <h1> <%= @client.name %> <small><a href="mailto:<%= @client.email %>"><%= @client.email %></a></small></h1>
+</div>
 <div class='span3'>
-  <%= image_tag @client.picture %> 
+  <div class='thumbnail'>
+    <%= image_tag @client.picture %> 
+  </div>
 </div>
 <div class='span3'>
 <% if @client.phone.length > 0 %>

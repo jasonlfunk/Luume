@@ -1,5 +1,6 @@
-<h1>Projects<% unless @current_user.clients.empty? %><small style='padding-left: 10px;'><%= link_to 'New Project', new_project_path %></small><%end%></h1>
-<br/>
+<div class="page-header"> 
+  <h1>Projects<% unless @current_user.clients.empty? %><small style='padding-left: 10px;'><%= link_to 'New Project', new_project_path %></small><%end%></h1>
+</div>
 <% if @current_user.clients.empty? %>
   <div class="alert alert-block alert-info">
     <h4 class="alert-heading">No Clients Found!</h4>
@@ -12,11 +13,9 @@
   </div>
 <% else %>
    <% @projects.each do |project| %>
-    <div class='project span3'>
-        <%= link_to project_path(project) do %>
-          <%= image_tag project.picture %>
-        <% end %><br/>
-        <%= link_to project.name, project_path(project) %><br/>
+    <div class='thumbnail project span3'>
+      <%= link_to project_path(project) do %><%= image_tag project.picture %><%end%><br/>
+      <%= link_to project.name, project_path(project) %><br/>
     </div>
   <% end %>
 <% end %>

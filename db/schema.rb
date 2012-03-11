@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120310171120) do
+ActiveRecord::Schema.define(:version => 20120311002605) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(:version => 20120310171120) do
     t.integer  "task_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.boolean  "invoiced"
+    t.integer  "billable"
   end
 
   add_index "logs", ["task_id"], :name => "index_logs_on_task_id"

@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby -I ../lib -I lib
 # coding: utf-8
+require 'rubygems'
 require 'libs/db_setup'
 require 'sinatra'
 require 'libs/partials'

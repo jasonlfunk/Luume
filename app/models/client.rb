@@ -6,6 +6,6 @@ class Client < ActiveRecord::Base
                     :styles => { :original => "256x256#", :thumb => "75x75#" }
 
   has_many :projects, :order => "name ASC"
-  belongs_to :user
+  belongs_to :user, :dependent => :destroy
   validates_presence_of :user
 end

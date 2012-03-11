@@ -1,0 +1,8 @@
+<%= simple_form_for [@project,@task], :html => {:class => 'form-horizontal' }  do |f| %>
+  <%= f.input :name, :label => "Task Name" %>
+  <%= f.input :description, :label => "Task Description" ,:input_html => { :rows => 5 } %>
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to 'Cancel', project_path(@project), :class => 'btn' %>
+    </div>
+<% end %>

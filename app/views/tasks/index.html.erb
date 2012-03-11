@@ -6,7 +6,10 @@
   You have not created any tasks for this project yet!
 </div>
 <% else %>
-
+  <% @tasks.each do |task| %>
+    <h3><%= task.name %></h3>
+    <div><%= task.description %></div>
+  <% end %>
 <% end %>
 <div class="cb"></div><br/>
 <div class="form-actions">

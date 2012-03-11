@@ -16,9 +16,8 @@ Luume::Application.routes.draw do
 
   get "home/index"
   
-  resources :projects
-
   resources :clients
+
   resources :projects do
     resources :tasks do
       resources :logs do

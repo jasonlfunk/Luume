@@ -49,35 +49,15 @@ class ClientsController < ApplicationController
   # POST /clients
   # POST /clients.json
   def create
-    logger.error("Beta failed! Setting flash")
-    logger.info("Beta failed! Setting flash")
-    logger.debug("Beta failed! Setting flash")
+    @client = Client.new(params[:client])
 
-    if params[:beta_secret]
-      if params[:beta_secret] !=~ /[A-Z]{4}[0-9]{3}/
-        beta_fail = true
-      end
-    else
-      beta_fail = true
-    end
-    
-    if beta_fail 
-      flash.now[:error] = "Your beta code was invalid."
-      respond_to do |format|
+    respond_to do |format|
+      if @client.save
+        format.html { redirect_to @client, :notice => 'Client was successfully created.' }
+        format.json { render :json => @client, :status => :created, :location => @client }
+      else
         format.html { render :action => "new" }
         format.json { render :json => @client.errors, :status => :unprocessable_entity }
-      end
-    else
-      @client = Client.new(params[:client])
-
-      respond_to do |format|
-        if @client.save
-          format.html { redirect_to @client, :notice => 'Client was successfully created.' }
-          format.json { render :json => @client, :status => :created, :location => @client }
-        else
-          format.html { render :action => "new" }
-          format.json { render :json => @client.errors, :status => :unprocessable_entity }
-        end
       end
     end
   end

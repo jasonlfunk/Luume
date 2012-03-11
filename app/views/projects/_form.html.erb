@@ -1,0 +1,15 @@
+<%= simple_form_for @project, :html => {:class => 'form-horizontal' }  do |f| %>
+  <fieldset>
+    <legend><%= controller.action_name.capitalize %> Project</legend>
+    <%= f.association :client, :required => false, :label => "Project Client" %>
+    <%= f.input :name, :label => "Project Name" %>
+    <%= f.input :description, :label => "Project Description", :input_html => {:rows => 5} %>
+    <%= f.input :start, :label => "Project Start Date" %>
+    <%= f.input :finish, :label => "Project Finish Date", :include_blank => true %>
+    <%= f.input :rate, :label => "Hourly Rate" , :input_html => {:style => 'width: 40px;'}%>
+    <%= f.input :picture %>
+    <%= f.button :submit, :class => 'btn-info' %>
+    <%= link_to 'Cancel', projects_path, :class => 'btn' %>
+    </div>
+  </fieldset>
+<% end %>

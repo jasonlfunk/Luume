@@ -1,0 +1,55 @@
+<%= form_for @client, :html => { :class => 'form-horizontal', :multipart => true } do |f| %>
+  <fieldset>
+    <legend><%= controller.action_name.capitalize %> Client</legend>
+
+    <div class="control-group">
+      <%= f.label :name, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :name, :class => 'text_field' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :email, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :email, :class => 'text_field' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :phone, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :phone, :class => 'text_field' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :address, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :address, :class => 'text_area', :rows => 3 %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :comments, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :comments, :class => 'text_area', :rows => 5 %>
+      </div>
+    </div>
+    
+    <div class="control-group">
+      <%= f.label :picture, :class => 'control-label' %>
+      <div class="controls">
+        <% if @client.picture.file? %>
+          <%= image_tag @client.picture(:thumb) %><br/>
+        <% end %>
+        <%= f.file_field :picture %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to 'Cancel', clients_path, :class => 'btn' %>
+    </div>
+  </fieldset>
+<% end %>

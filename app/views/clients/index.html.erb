@@ -1,0 +1,17 @@
+<div class="page-header"> 
+  <h1>Clients<small style='padding-left: 10px;'><%= link_to 'New Client', new_client_path %></small></h1>
+</div>
+<% if @clients.empty? %>
+  <div class="alert alert-block alert-info">
+    <h4 class="alert-heading">No Clients Found!</h4>
+    It looks like you haven't created any clients yet! Click on the "New Client" link above to get started.
+  </div>
+<% else %>
+  <% @clients.each do |client| %>
+    <div class='thumbnail client span3'>
+        <%= link_to client_path(client) do %><%= image_tag client.picture %><% end %><br/>
+        <%= link_to client.name, client_path(client) %><br/>
+    </div>
+  <% end %>
+<% end %>
+<div class='cb'/>

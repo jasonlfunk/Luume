@@ -1,0 +1,15 @@
+<div class="page-header">
+    <h1>Sign Up <small>The first step towards better project management.</small></h1>
+</div>
+<%= simple_form_for @user, :url => signup_create_path, :html => {:class => 'form-horizontal' }  do |f| %>
+  <%= f.input :email, :label => "Email Address" %>
+  <%= f.input :password, :hint => "Please use a good, strong password!" %>
+  <%= f.input :password_confirmation %>
+  <%= f.input :beta_code, :label => "Beta Access Code", :hint => "[a-zA-Z]{3}[0-4][M-Z][a-g][a-zA-Z0-9]{4}" %> 
+  <%= f.submit "Sign up", :class => "btn-success" %>
+  <div class="control-group">
+    <div class="controls">
+      Already have an account? <%= link_to "Log in", login_path %>.
+    </div>
+  </div>
+<% end %>

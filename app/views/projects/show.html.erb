@@ -1,0 +1,24 @@
+<div class="page-header"> 
+  <h1> <%= @project.name %>&nbsp;<small><%= @project.start %><%= @project.finish ? " to " + @project.finish.to_s : "" %></small></h1> 
+</div>
+<div class='span3'>
+  <div class='thumbnail'>
+    <%= image_tag @project.picture %> 
+  </div>
+</div>
+<div class='span6'>
+  <h4>Client</h4>
+  <%= link_to @project.client.name, client_path(@project.client) %><br/>
+  <h4>Rate</h4>
+  <%= number_to_currency(@project.rate) %>/hr<br/>
+  <h4>Description</h4>
+  <%= @project.description %><br/><br/>
+  <h4>Tasks</h4>
+  <%= link_to pluralize(@project.tasks.count," Tasks"), project_tasks_path(@project) %>
+</div>
+<div class="cb"></div><br/>
+<div class="form-actions">
+  <%= link_to 'Back', projects_path, :class => 'btn'  %>
+  <%= link_to 'Edit', edit_project_path(@project), :class => 'btn' %>
+  <%= link_to 'Delete', project_path(@project), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+</div>

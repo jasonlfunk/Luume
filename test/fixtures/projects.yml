@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  description: MyText
+  begin: 2012-03-03 15:33:57
+  finish: 2012-03-03 15:33:57
+  rate: 1
+  client: 
+
+two:
+  name: MyString
+  description: MyText
+  begin: 2012-03-03 15:33:57
+  finish: 2012-03-03 15:33:57
+  rate: 1
+  client: 

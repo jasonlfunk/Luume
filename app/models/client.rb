@@ -5,7 +5,7 @@ class Client < ActiveRecord::Base
                     :default_url => "/images/default/:style/client.png",
                     :styles => { :original => "256x256#", :thumb => "75x75#" }
 
-  has_many :projects, :order => "name ASC"
-  belongs_to :user, :dependent => :destroy
+  has_many :projects, :order => "name ASC", :dependent => :destroy
+  belongs_to :user
   validates_presence_of :user
 end

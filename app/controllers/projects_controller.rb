@@ -1,5 +1,7 @@
 class ProjectsController < ApplicationController
   before_filter :login_required
+  before_filter :validate_ownership, :except => [:index, :new, :create]
+
   # GET /projects
   # GET /projects.json
   def index
@@ -15,17 +17,9 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @project = Project.find(params[:id])
-   
-    if @project.client.user == @current_user 
-      respond_to do |format|
-        format.html # show.html.erb
-        format.json { render :json => @project }
-      end
-    else
-      respond_to do |format|
-        format.html { redirect_to projects_path, :notice => "Sorry, you don't have access to that project." }
-        format.json { render :status => 403 }
-      end
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render :json => @project }
     end
   end
 
@@ -88,5 +82,17 @@ class ProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
+  private
+
+  def validate_ownership
+    project = Project.find(params[:id])
+    if project.client.user != @current_user 
+      respond_to do |format|
+        format.html { redirect_to projects_path, :notice => "Sorry, you don't have access to that project." }
+        format.json { render :status => 403 }
+      end
+    end
+  end
+
 end

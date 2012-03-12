@@ -1,14 +1,15 @@
 Luume::Application.routes.draw do
 
   match 'user/edit' => 'users#edit', :as => :edit_current_user
-
+  
   get 'signup' => 'users#new', :as => :signup
   
   post 'signup' => 'users#create', :as => :signup_create
-
+  
   match 'logout' => 'sessions#destroy', :as => :logout
-
+  
   match 'login' => 'sessions#new', :as => :login
+
 
   resources :sessions
 
@@ -20,7 +21,9 @@ Luume::Application.routes.draw do
 
   resources :projects do
     resources :tasks do
-      resources :logs do
+       match 'start' => 'log#start', :as => :start
+      resources :log do
+        match 'stop' => 'log#stop', :as => :stop
       end
     end
   end

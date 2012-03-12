@@ -8,14 +8,16 @@
   </div>
 <% elsif @projects.empty? %>
   <div class="alert alert-block alert-info">
-    <h4 class="alert-heading">No Clients Found!</h4>
-    It looks like you haven't created any clients yet! Click on the "New Client" link above to get started.
+    <h4 class="alert-heading">No Projects Found!</h4>
+    It looks like you haven't created any projects yet! Click on the "New Project" link above to get started.
   </div>
 <% else %>
    <% @projects.each do |project| %>
-    <div class='thumbnail project span3'>
-      <%= link_to project_path(project) do %><%= image_tag project.picture %><%end%><br/>
-      <%= link_to project.name, project_path(project) %><br/>
+     <div class='project span3'>
+       <div class='thumbnail'>
+        <%= link_to project_path(project) do %><%= image_tag project.picture %><%end%><br/>
+        <%= link_to project.name, project_path(project) %><br/>
+      </div>
     </div>
   <% end %>
 <% end %>

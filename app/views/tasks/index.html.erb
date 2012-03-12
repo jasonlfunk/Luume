@@ -6,13 +6,79 @@
   You have not created any tasks for this project yet!
 </div>
 <% else %>
-  <% @tasks.each do |task| %>
-    <h3><%= task.name %></h3>
-    <div><%= task.description %></div>
+  <% @tasks.each_with_index do |task,idx| %>
+    <% if idx%3 == 0 %>
+      <div class="row">
+    <% end %>
+      <div class="span4">
+        <h3><%= task.name %>
+          <% if !@project.running? %>
+            <%= link_to 'Start Timer', project_task_start_path(@project,task), :class => 'btn btn-mini btn-success task-edit' %>
+          <% end %>
+          <%= link_to 'Edit', edit_project_task_path(@project,task), :class => 'btn btn-mini btn-info task-edit' %>
+          <%= link_to 'Delete', project_task_path(@project,task), :method => :delete, :class => 'btn btn-mini btn-danger task-edit', :confirm => "Are you sure you want to delete this task and all of it's logs?"%></h3>
+        <div class="task-description">
+          <% if task.description.length > 104 %>
+            <%= task.description[0..100] %><span class="elipse">...</span><%= link_to_function 'More', 'showMore(this)', :class => "more" %><span class="more"><%= task.description[101..-1]%><%= link_to_function 'Less', 'showLess(this)', :class => "less" %></span>
+          <% else %>
+            <%= task.description %>
+          <% end %>
+        </div>
+        <table class="table table-condensed table-striped task-log" project_id="<%= @project.id %>" task_id="<%= task.id %>">
+          <thead>
+            <tr>
+              <th style='width: 110px;'>Date</th>
+              <th style='width: 1px;'>Actual</th>
+              <th style='width: 1px;'>Billable</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% task.logs.each do |log| %>
+              <% if log.start && log.end.nil? %>
+                <tr log_id="<%= log.id %>">
+                  <td><%= link_to_function log.start.to_date,"",
+                    :rel=>"tooltip",
+                    :title=>log.start.strftime("%H:%M") + " - Now" %>
+                  </td>
+                  <td><%= log.actual %></td>
+                  <td><%= log.billable %></td>
+                  <td><%= link_to "Stop", project_task_log_stop_path(@project,task,log), :class=>'btn btn-mini btn-danger' %></td>
+                </tr>
+              <% else %>
+                <tr log_id="<%= log.id %>">
+                  <% if log.start && log.end && log[:actual].nil? %>
+                    <td><%= link_to_function log.start.to_date,"",
+                      :rel=>"tooltip",
+                      :title=>log.start.strftime("%H:%M") + " - " + log.end.strftime("%H:%M") %>
+                    </td>
+                  <% else %>
+                    <td><%= log.start.to_date %></td>
+                  <% end %>
+                  <td><input for="actual" value="<%= log.actual %>"/></td>
+                  <td><input for="billable" value="<%= log.billable %>"></td>
+                  <td><%= link_to "Delete", 
+                    project_task_log_path(@project,task,log),
+                    :method => :delete, 
+                    :class=>'btn btn-mini btn-danger task-edit'
+                    %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+          <tfoot>
+            <tr><td>Total</td><td><%= task.actual %></td><td><%= task.billable %></td><td></td></tr>
+          </tfoot>
+        </table>
+      </div>
+    <% if idx%3 == 2 %>
+      </div> 
+    <% end %>
   <% end %>
 <% end %>
 <div class="cb"></div><br/>
 <div class="form-actions">
   <%= link_to 'Back', project_path(@project), :class => 'btn' %>
-  <%= link_to 'New Task', new_project_task_path(@project), :class => 'btn btn-info' %>
+  <%= link_to_function 'Edit Tasks', '$("a.task-edit").fadeToggle()', :class => 'btn btn-info' unless @tasks.empty? %>
+  <%= link_to 'New Task', new_project_task_path(@project), :class => 'btn btn-success' %>
 </div>

@@ -6,15 +6,21 @@
     <%= image_tag @project.picture %> 
   </div>
 </div>
-<div class='span6'>
+<div class='span3'>
   <h4>Client</h4>
   <%= link_to @project.client.name, client_path(@project.client) %><br/>
   <h4>Rate</h4>
   <%= number_to_currency(@project.rate) %>/hr<br/>
   <h4>Description</h4>
-  <%= @project.description %><br/><br/>
+  <%= @project.description %><br/>
+</div>
+<div class='span3'>
   <h4>Tasks</h4>
   <%= link_to pluralize(@project.tasks.count," Tasks"), project_tasks_path(@project) %>
+  <h4>Uninvoiced Time</h4>
+  <%= @project.time("actual") %> hrs/<%= @project.time("billable") %> hrs<br/>
+  <h4>Total Time</h4>
+  <%= @project.time("actual",false) %> hrs/<%= @project.time("billable",false) %> hrs<br/>
 </div>
 <div class="cb"></div><br/>
 <div class="form-actions">

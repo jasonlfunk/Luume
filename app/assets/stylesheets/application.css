@@ -22,3 +22,10 @@ footer {
 div.cb {
   clear: both;
 }
+
+span.more {
+  display: none;
+}
+a.more, a.less {
+  margin-left: 2px;
+}

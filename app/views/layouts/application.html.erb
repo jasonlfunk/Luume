@@ -23,7 +23,6 @@
     <link href="/images/apple-touch-icon.png" rel="apple-touch-icon">
     <link href="/images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
     <link href="/images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
-    <script type ="text/javascript" src="/js/jquery.js"></script>
   </head>
   <body>
 
@@ -35,18 +34,18 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="/">Luume</a>
+          <a class="brand" href="/">Luume <%= controller.controller_name %></a>
           <div class="container nav-collapse">
             <ul class="nav">
               <% if logged_in? %>
-                <li <% if current_page? clients_path %>class="active"<%end%>>
+                <li <% if ["clients"].include?(controller.controller_name) %>class="active"<%end%>>
                 <%= link_to clients_path do %>
-                  <i class='<% if current_page? clients_path %>icon-white<%end%> icon-user'></i> Clients
+                  <i class='<% if ["clients"].include?(controller.controller_name) %>icon-white<%end%> icon-user'></i> Clients
                 <% end %>
                 </li>
-                <li <% if current_page? projects_path %>class="active"<%end%>>
+                <li <% if ["projects","tasks"].include?(controller.controller_name) %>class="active"<%end%>>
                 <%= link_to projects_path do %>
-                  <i class='<% if current_page? projects_path %>icon-white<%end%> icon-th-large'></i> Projects 
+                  <i class='<% if ["projects","tasks"].include?(controller.controller_name) %>icon-white<%end%> icon-th-large'></i> Projects 
                 <% end %>
                 </li>
                 <li> 
@@ -108,6 +107,7 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <script type ="text/javascript" src="/js/jquery.js"></script>
     <%= javascript_include_tag "application" %>
     <%= javascript_include_tag "site" %>
   </body>

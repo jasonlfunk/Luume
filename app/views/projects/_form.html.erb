@@ -1,5 +1,5 @@
 <%= simple_form_for @project, :html => {:class => 'form-horizontal' }  do |f| %>
-  <%= f.association :client, :required => false, :label => "Project Client" %>
+  <%= f.association :client, :collection => @current_user.clients,:required => false, :label => "Project Client" %>
   <%= f.input :name, :label => "Project Name" %>
   <%= f.input :description, :label => "Project Description", :input_html => {:rows => 5} %>
   <%= f.input :start, :label => "Project Start Date" %>
@@ -8,6 +8,10 @@
   <%= f.input :picture %>
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn-info' %>
-    <%= link_to 'Cancel', projects_path, :class => 'btn' %>
+    <% if @project.created_at %>
+      <%= link_to 'Cancel', project_path(@project), :class => 'btn' %>
+    <% else %>
+      <%= link_to 'Cancel', projects_path, :class => 'btn' %>
+    <% end %>
   </div>
 <% end %>

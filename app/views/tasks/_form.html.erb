@@ -3,6 +3,7 @@
   <%= f.input :description, :label => "Task Description" ,:input_html => { :rows => 5 } %>
     <div class="form-actions">
       <%= f.submit nil, :class => 'btn btn-primary' %>
-      <%= link_to 'Cancel', project_path(@project), :class => 'btn' %>
+      <%= link_to 'Delete Task', project_task_path(@project,@task), :class => 'btn btn-danger', :method => :delete if @task.created_at %>
+      <%= link_to 'Cancel', project_tasks_path(@project), :class => 'btn' %>
     </div>
 <% end %>

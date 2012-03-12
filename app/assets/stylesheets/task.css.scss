@@ -1,3 +1,39 @@
 // Place all the styles related to the Task controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+a.task-edit {
+  display: none;
+}
+div.task-description {
+  color: #666;
+  font-size: .9em;
+  padding-bottom: 5px;
+}
+
+table.task-log {
+  td,th {
+    text-align: center;
+  }
+  thead {
+    font-weight: bold;
+  }
+  tbody {
+    td {
+      input {
+        border: none;
+        padding: 0px;
+        margin: 0px;
+        background: transparent;
+        width: 50px;
+        text-align: center;
+        outline: none;
+        box-shadow: none;
+        -webkit-box-shadow: none;
+      }
+    }
+  }
+  tfoot {
+    font-weight: bold;
+  }
+}

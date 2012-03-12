@@ -20,26 +20,8 @@ class TasksController < ApplicationController
         format.json { render :status => 404 }
       end
     end
-    @task = @project.tasks.build
-  end
-
-  # GET /tasks/new
-  # GET /tasks/new.json
-  def new
-    @project = Project.find(params[:project_id])
-    if @project.nil? || @project.client.user != current_user
-      respond_to do |format|
-        format.html { redirect_to projects_path, :notice => "Sorry, you don't have access to that project." }
-        format.json { render :status => 404 }
-      end
-    end
-
     @task = Task.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render :json => @task }
-    end
+    @task.project = @project
   end
 
   # GET /tasks/1/edit
@@ -64,7 +46,8 @@ class TasksController < ApplicationController
         format.json { render :status => 404 }
       end
     end
-    @task = @project.tasks.build(params[:task])
+    @task = Task.new(params[:task])
+    @task.project = @project
 
     respond_to do |format|
       if @task.save
@@ -91,7 +74,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.update_attributes(params[:task])
-        format.html { redirect_to @task, :notice => 'Task was successfully updated.' }
+        format.html { redirect_to project_tasks_path(@project), :notice => 'Task was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render :action => "edit" }
@@ -114,7 +97,7 @@ class TasksController < ApplicationController
     @task.destroy
 
     respond_to do |format|
-      format.html { redirect_to tasks_url }
+      format.html { redirect_to project_tasks_url(@project), :notice => "Task was successfully deleted." }
       format.json { head :no_content }
     end
   end

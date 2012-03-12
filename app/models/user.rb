@@ -12,9 +12,9 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password
   validates_length_of :password, :minimum => 4, :allow_blank => true
   
-  has_many :clients, :order => "name ASC"
-  has_many :projects, :through => :clients, :order => "name ASC"
-  has_many :roles, :order => "role ASC"
+  has_many :clients, :order => "name ASC", :dependent => :destroy, :dependent => :destroy 
+  has_many :projects, :through => :clients, :order => "name ASC", :dependent => :destroy
+  has_many :roles, :order => "role ASC", :dependent => :destroy
 
   def self.authenticate(login, pass)
     user = find_by_email(login)

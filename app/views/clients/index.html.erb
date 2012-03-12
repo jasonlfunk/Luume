@@ -8,9 +8,11 @@
   </div>
 <% else %>
   <% @clients.each do |client| %>
-    <div class='thumbnail client span3'>
+    <div class='client span3'>
+      <div class='thumbnail'>
         <%= link_to client_path(client) do %><%= image_tag client.picture %><% end %><br/>
         <%= link_to client.name, client_path(client) %><br/>
+      </div>
     </div>
   <% end %>
 <% end %>

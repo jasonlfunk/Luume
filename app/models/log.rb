@@ -35,6 +35,6 @@ class Log < ActiveRecord::Base
 
   def hours(s,e)
     diff = ((e-s) * 24).to_f
-    (diff*10).ceil/10.0
+    (diff*10).floor/10.0
   end
 end

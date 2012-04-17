@@ -58,7 +58,7 @@ class ProjectsController < ApplicationController
   # PUT /projects/1
   # PUT /projects/1.json
   def update
-    @project = Project.find(params[:id])
+    @project = Project.find_by_id(params[:id])
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
@@ -74,7 +74,7 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1
   # DELETE /projects/1.json
   def destroy
-    @project = Project.find(params[:id])
+    @project = Project.find_by_id(params[:id])
     @project.destroy
 
     respond_to do |format|
@@ -83,10 +83,53 @@ class ProjectsController < ApplicationController
     end
   end
 
+  # POST /projecst/1/generate
+  def generate
+    @project = Project.find_by_id(params[:id])
+    if params[:log].nil? || params[:log].length == 0
+      respond_to do |format|
+        format.html { redirect_to :back, :notice => 'No task logs were selected.' }
+        format.json { head :no_content }
+      end
+    else
+      tasks = Hash.new
+      params[:log].each do |logid|
+        log = Log.find_by_id(logid)
+        unless tasks.has_key?(log.task.id)
+          tasks[log.task.id] = {
+            'name' => log.task.name,
+            'description' => log.task.description,
+            'total' => 0
+          }
+        end
+        tasks[log.task.id]['total'] += log.billable
+        log.invoiced = true
+        log.save
+      end
+      invoice = Invoice.new
+      invoice.project = @project
+      invoice.date = Time.now
+      tasks.each do |task_id,task|
+        invoice_entry = InvoiceEntry.new
+        invoice_entry.title = task['name']
+        invoice_entry.description = task['description']
+        invoice_entry.hours = task['total']
+        invoice_entry.rate = @project.rate
+        invoice_entry.save
+        invoice.invoice_entries.push invoice_entry
+      end
+      invoice.save
+      respond_to do |format|
+        format.html { redirect_to project_invoices_url(@project), :notice => 'Invoice created!' }
+        format.json { head :no_content }
+      end
+    end
+  end
+
   private
 
   def validate_ownership
-    project = Project.find(params[:id])
+    project = Project.find_by_id(params[:id])
     if project.client.user != @current_user 
       respond_to do |format|
         format.html { redirect_to projects_path, :notice => "Sorry, you don't have access to that project." }

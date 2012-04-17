@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  invoice: 
+  title: MyString
+  description: MyText
+  hours: 9.99
+  rate: 9.99
+
+two:
+  invoice: 
+  title: MyString
+  description: MyText
+  hours: 9.99
+  rate: 9.99

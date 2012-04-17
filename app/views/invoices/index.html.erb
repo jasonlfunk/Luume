@@ -1,0 +1,33 @@
+<div class="page-header"> 
+  <h1><%= @project.name.possessive %> Invoices <small>Show me the money!</small></h1>
+</div>
+<% if @invoices.empty? %>
+<div class="alert alert-info">
+  You have not created any invoices for this project yet!
+</div>
+<% else %>
+  <table class="table table-condensed table-striped">
+    <thead>
+      <tr>
+        <th>Invoice Generated</th>
+        <th>Total Hours</th>
+        <th>Total Amount</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @invoices.each do |invoice| %>
+      <tr>
+        <td><%= link_to invoice.date.strftime('%m/%d/%Y %I:%M%p'), project_invoice_path(@project,invoice) %></td>
+        <td><%= invoice.total_hours %></td>
+        <td><%= number_to_currency(invoice.total_amount) %></td>
+        <td><%= link_to 'Delete', project_invoice_path(@project,invoice), :method => :delete, :class => 'btn btn-mini btn-danger', :confirm => "Are you sure you want to delete this invoice?"%></td>
+      </tr>  
+    <% end %>
+    </tbody>
+ </table>
+<% end %>
+<div class="cb"></div><br/>
+<div class="form-actions">
+  <%= link_to 'Back', project_path(@project), :class => 'btn' %>
+</div>

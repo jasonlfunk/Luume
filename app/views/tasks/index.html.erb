@@ -6,6 +6,8 @@
   You have not created any tasks for this project yet!
 </div>
 <% else %>
+  <form method="POST" action="<%= generate_invoice_path(@project) %>">
+    <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
   <% @tasks.each_with_index do |task,idx| %>
     <% if idx%3 == 0 %>
       <div class="row">
@@ -27,17 +29,19 @@
         <table class="table table-condensed table-striped task-log" project_id="<%= @project.id %>" task_id="<%= task.id %>">
           <thead>
             <tr>
-              <th style='width: 110px;'>Date</th>
+              <th style='width: 120px;'>Date</th>
               <th style='width: 1px;'>Actual</th>
               <th style='width: 1px;'>Billable</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            <% task.logs.each do |log| %>
+            <% task.logs.find_all{|log| !log.invoiced}.each do |log| %>
+              <tr log_id="<%= log.id %>">
+                 <td>
+                   <input type='checkbox' class='log-invoice' name='log[]' value='<%= log.id %>' checked='checked'/>
               <% if log.start && log.end.nil? %>
-                <tr log_id="<%= log.id %>">
-                  <td><%= link_to_function log.start.to_date,"",
+                    <%= link_to_function log.start.to_date,"",
                     :rel=>"tooltip",
                     :title=>log.start.strftime("%H:%M") + " - Now" %>
                   </td>
@@ -46,14 +50,14 @@
                   <td><%= link_to "Stop", project_task_log_stop_path(@project,task,log), :class=>'btn btn-mini btn-danger' %></td>
                 </tr>
               <% else %>
-                <tr log_id="<%= log.id %>">
                   <% if log.start && log.end && log[:actual].nil? %>
-                    <td><%= link_to_function log.start.to_date,"",
+                      <%= link_to_function log.start.to_date,"",
                       :rel=>"tooltip",
                       :title=>log.start.strftime("%H:%M") + " - " + log.end.strftime("%H:%M") %>
                     </td>
                   <% else %>
-                    <td><%= log.start.to_date %></td>
+                      <%= log.start.to_date %>
+                    </td>
                   <% end %>
                   <td><input for="actual" value="<%= log.actual %>"/></td>
                   <td><input for="billable" value="<%= log.billable %>"></td>
@@ -75,10 +79,12 @@
       </div> 
     <% end %>
   <% end %>
+  </form>
 <% end %>
 <div class="cb"></div><br/>
 <div class="form-actions">
   <%= link_to 'Back', project_path(@project), :class => 'btn' %>
-  <%= link_to_function 'Edit Tasks', '$("a.task-edit").fadeToggle()', :class => 'btn btn-info' unless @tasks.empty? %>
   <%= link_to 'New Task', new_project_task_path(@project), :class => 'btn btn-success' %>
+  <%= link_to_function 'Edit Tasks', '$("a.task-edit").fadeToggle()', :class => 'btn btn-info' unless @tasks.empty? %>
+  <%= link_to_function 'Create Invoice', 'prepareInvoice()', :class => 'btn btn-inverse' unless @tasks.empty? %>
 </div>

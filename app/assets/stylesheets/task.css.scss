@@ -31,6 +31,10 @@ table.task-log {
         box-shadow: none;
         -webkit-box-shadow: none;
       }
+      input.log-invoice {
+        display: none;
+        width: 16px;
+      }
     }
   }
   tfoot {

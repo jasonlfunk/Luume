@@ -1,0 +1,10 @@
+User's Name
+<%= @current_user.email %><br/>
+<br/>
+<%= @invoice.project.client.name %><br/>
+<i><%= @invoice.project.client.email %></i><br/>
+<% @invoice.invoice_entries.each do |entry| %>
+  <h2><%= entry.title %></h2>
+  <p><%= entry.description %></p>
+  <p><b><%=entry.hours%>hrs * <%=number_to_currency(entry.rate)%> = <%=number_to_currency(entry.hours * entry.rate) %></b></p>
+<% end %>

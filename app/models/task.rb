@@ -14,7 +14,7 @@ class Task < ActiveRecord::Base
 
   def actual
     total = 0.0
-    self.logs.each do |log|
+    self.logs.find_all{|log| !log.invoiced}.each do |log|
       total += log.actual
     end 
     total
@@ -22,7 +22,7 @@ class Task < ActiveRecord::Base
 
   def billable
     total = 0.0
-    self.logs.each do |log|
+    self.logs.find_all{|log| !log.invoiced}.each do |log|
       total += log.billable
     end 
     total

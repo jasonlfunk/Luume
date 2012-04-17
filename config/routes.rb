@@ -10,6 +10,7 @@ Luume::Application.routes.draw do
   
   match 'login' => 'sessions#new', :as => :login
 
+  post 'projects/:id/generate' => 'projects#generate', :as => :generate_invoice 
 
   resources :sessions
 
@@ -20,6 +21,7 @@ Luume::Application.routes.draw do
   resources :clients
 
   resources :projects do
+    resources :invoices
     resources :tasks do
        match 'start' => 'log#start', :as => :start
       resources :log do

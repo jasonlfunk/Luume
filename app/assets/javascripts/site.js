@@ -61,6 +61,16 @@ $(document).ready(function() {
         $(that).animate({backgroundColor: "white"},1000);
       },'json'
     );
-    console.log("Should save!");
   });
 });
+
+function prepareInvoice() {
+  if($(".log-invoice:hidden").length != 0){
+    $(".page-header:first").after('<div id="pia" class="alert alert-info" style="display: none;">Select the tasks to add to the invoice and then click the \'Create Invoice\' button again.</div>');
+    $("#pia").fadeIn();
+    $(".log-invoice").fadeIn();
+    $("body").scrollTop(0);
+  }else{
+    $("form").submit();
+  }
+}

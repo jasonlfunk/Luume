@@ -43,9 +43,9 @@
                   <i class='<% if ["clients"].include?(controller.controller_name) %>icon-white<%end%> icon-user'></i> Clients
                 <% end %>
                 </li>
-                <li <% if ["projects","tasks"].include?(controller.controller_name) %>class="active"<%end%>>
+                <li <% if ["projects","tasks","invoices"].include?(controller.controller_name) %>class="active"<%end%>>
                 <%= link_to projects_path do %>
-                  <i class='<% if ["projects","tasks"].include?(controller.controller_name) %>icon-white<%end%> icon-th-large'></i> Projects 
+                  <i class='<% if ["projects","tasks","invoices"].include?(controller.controller_name) %>icon-white<%end%> icon-th-large'></i> Projects 
                 <% end %>
                 </li>
                 <li> 

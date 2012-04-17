@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120312000309) do
+ActiveRecord::Schema.define(:version => 20120417003616) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -28,6 +28,27 @@ ActiveRecord::Schema.define(:version => 20120312000309) do
   end
 
   add_index "clients", ["user_id"], :name => "index_clients_on_user_id"
+
+  create_table "invoice_entries", :force => true do |t|
+    t.integer  "invoice_id"
+    t.string   "title"
+    t.text     "description"
+    t.decimal  "hours",       :precision => 10, :scale => 2
+    t.decimal  "rate",        :precision => 10, :scale => 2
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
+  end
+
+  add_index "invoice_entries", ["invoice_id"], :name => "index_invoice_entries_on_invoice_id"
+
+  create_table "invoices", :force => true do |t|
+    t.datetime "date"
+    t.integer  "project_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "invoices", ["project_id"], :name => "index_invoices_on_project_id"
 
   create_table "logs", :force => true do |t|
     t.datetime "start"

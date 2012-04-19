@@ -1,0 +1,65 @@
+<table>
+  <tr>
+    <td>
+			<% if @template_format == "pdf" %>
+				<%= wicked_pdf_image_tag @current_user.logo.path %>
+			<% else %>
+				<%= image_tag @current_user.logo %>
+			<% end %>
+    </td>
+    <td style='vertical-align: top;padding-left: 10px;font-size: 1.2em;line-height: 1.2em;'>
+      <span style='font-size: 1.2em;'><b><%= @current_user.name %></b> <i><%= @current_user.email %></i></span><br/>
+      <i><%= @current_user.website %></i><br/>
+      <div style='margin-top: 5px;'>
+        <%= @current_user.address %><br/>
+        <%= @current_user.city %> <%= @current_user.state %> <%= @current_user.zip %>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan='2' style='height: 15px;'></td>
+  </tr>
+  <tr>
+    <td style='text-align: right; font-size: 1.4em;vertical-align:top;'>
+      <b>Bill To:</b> 
+    </td>
+    <td style='vertical-align: top;padding-left: 10px;font-size: 1.2em;'>
+      <%= @invoice.project.client.name %><br/>
+      <i><%= @invoice.project.client.email %></i><br/>
+      <% if @invoice.project.client.address %>
+        <%= @invoice.project.client.address %>
+      <% end %>
+    </td>
+  </tr>
+</table>
+<table class='table'>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Hours</th>
+      <th>Rate</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @invoice.invoice_entries.each do |entry| %>
+    <tr>
+      <td>
+        <b><%= entry.title %></b><br/>
+        <p><%= entry.description %></p>
+      </td>
+      <td><%=entry.hours%></td>
+      <td><%=number_to_currency(entry.rate)%></td>
+      <td><%=number_to_currency(entry.hours * entry.rate) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td><b>Total</b></td>
+      <td><%= @invoice.total_hours %></td>
+      <td></td>
+      <td><%= number_to_currency(@invoice.total_amount) %></td>
+    </tr>
+  </tfoot>
+</table>

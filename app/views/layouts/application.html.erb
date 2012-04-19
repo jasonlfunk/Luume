@@ -38,6 +38,11 @@
           <div class="container nav-collapse">
             <ul class="nav">
               <% if logged_in? %>
+                <li <% if ["users"].include?(controller.controller_name) %>class="active"<%end%>>
+                <%= link_to profile_path do %>
+                  <i class='<% if ["users"].include?(controller.controller_name) %>icon-white<%end%> icon-home'></i> Profile 
+                <% end %>
+                </li>
                 <li <% if ["clients"].include?(controller.controller_name) %>class="active"<%end%>>
                 <%= link_to clients_path do %>
                   <i class='<% if ["clients"].include?(controller.controller_name) %>icon-white<%end%> icon-user'></i> Clients
@@ -82,23 +87,7 @@
           <% end %>
         </div>
         <div class="row">
-          <!--<div class="span12">-->
             <%= yield %>
-          <!--</div>-->
-          <!--
-          <div class="span1">&nbsp;</div>
-            <div class="span3">
-              <div class="well sidebar-nav">
-                <h3>Sidebar</h3>
-                <ul class="nav nav-list">
-                  <li class="nav-header">Sidebar</li>
-                    <li><%= link_to "Link1", "/path1"  %></li>
-                    <li><%= link_to "Link2", "/path2"  %></li>
-                    <li><%= link_to "Link3", "/path3"  %></li>
-                </ul>
-              </div>
-            </div>
-          </div> -->
         </div><!--/row-->
       </div><!--/content-->
 

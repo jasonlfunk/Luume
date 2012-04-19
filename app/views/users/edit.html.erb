@@ -1,3 +1,24 @@
-<% title "Update Profile" %>
-
-<%= render 'form' %>
+<div class="page-header">
+    <h1>Your Profile <small>Keep your information up to date.</small></h1>
+</div>
+<%= simple_form_for @user, :url => profile_save_path, :html => {:class => 'form-horizontal', :autocomplete=>"off" }  do |f| %>
+  <%= f.input :email, :label => "Email Address" %>
+  <%= f.input :password, :hint => "Leave blank to keep current password." %>
+  <%= f.input :password_confirmation %>
+  <hr>
+  <%= f.input :name, :label => "Name" %>
+  <%= f.input :address, :label => "Address" %>
+  <%= f.input :city, :input_html => {:class => "span2"}, :label => "City" %>
+  <%= f.input :state, :input_html => {:class => "span1", :maxlength => 2}, :label => "State" %>
+  <%= f.input :zip, :input_html => {:class => "span2"}, :label => "Zip" %>
+  <%= f.input :website, :label => "Website" %>
+  <%= f.input :logo, :label => "Logo" %>
+  <div class="control-group file optional">
+    <div class="controls">
+      <%= image_tag @user.logo %>
+    </div>
+  </div>
+  <div class="form-actions">
+    <%= f.submit "Save Profile", :class => "btn-success" %>
+  </div>
+<% end %>

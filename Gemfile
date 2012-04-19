@@ -28,7 +28,7 @@ gem "paperclip", "~> 2.7"
 gem 'chronic' 
 gem "nifty-generators", :group => :development
 gem 'simple_form'
-
+gem 'wicked_pdf', :git => 'https://github.com/mileszs/wicked_pdf.git'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

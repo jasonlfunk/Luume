@@ -19,6 +19,15 @@ class InvoicesController < ApplicationController
         format.json { render :status => 404 }
       end
     end
+    respond_to do |format|
+      format.html
+      format.pdf do
+        @template_format = "pdf"
+        render :pdf => "invoice",
+               :template => "invoices/pdf.html",
+               :layout => "invoice.html"
+      end 
+    end
   end
   def destroy
     @invoice = Invoice.find(params[:id])

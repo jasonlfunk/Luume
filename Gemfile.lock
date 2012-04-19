@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/mileszs/wicked_pdf.git
+  revision: 24b886096d52247a7d33f61cb186f81c899ef1de
+  specs:
+    wicked_pdf (0.7.7)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -149,3 +155,4 @@ DEPENDENCIES
   sqlite3
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
+  wicked_pdf!

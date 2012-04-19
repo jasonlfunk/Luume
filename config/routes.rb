@@ -1,6 +1,8 @@
 Luume::Application.routes.draw do
 
-  match 'user/edit' => 'users#edit', :as => :edit_current_user
+  get 'profile' => 'users#edit', :as => :profile
+  
+  put 'profile' => 'users#update', :as => :profile_save
   
   get 'signup' => 'users#new', :as => :signup
   

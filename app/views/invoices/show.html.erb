@@ -1,10 +1,6 @@
-User's Name
-<%= @current_user.email %><br/>
-<br/>
-<%= @invoice.project.client.name %><br/>
-<i><%= @invoice.project.client.email %></i><br/>
-<% @invoice.invoice_entries.each do |entry| %>
-  <h2><%= entry.title %></h2>
-  <p><%= entry.description %></p>
-  <p><b><%=entry.hours%>hrs * <%=number_to_currency(entry.rate)%> = <%=number_to_currency(entry.hours * entry.rate) %></b></p>
-<% end %>
+<%= render :partial => 'invoice' %>
+<div class="form-actions">
+  <%= link_to 'Back', project_invoices_path(@invoice.project), :class => 'btn' %>
+  <%= link_to 'Print PDF', project_invoice_path(@invoice.project,@invoice,:format=>:pdf), :class => 'btn btn-primary', :target => "_blank" %>
+  <%= link_to 'Delete', project_invoice_path(@invoice.project,@invoice), :method => :delete, :class => 'btn btn-danger', :confirm => "Are you sure you want to delete this invoice?"%></td>
+</div>

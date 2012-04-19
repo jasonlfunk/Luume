@@ -14,13 +14,9 @@
       <%= password_field_tag :password %>
     </div>
   </div>
-  <div class="control-group">
-    <div class="controls">
-      <%= submit_tag "Log in", :class=> "btn btn-primary"%>
-    </div>
-  </div>
-  <div class="control-group">
-    <div class="controls">
+  <div class="form-actions">
+    <%= submit_tag "Log in", :class=> "btn btn-primary"%><br>
+    <div style="margin-top: 10px;">
       <small>Don't have an account? <%= link_to "Sign up!", signup_path %></small>
     </div>
   </div>

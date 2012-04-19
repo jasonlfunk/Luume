@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%= wicked_pdf_stylesheet_link_tag "application" %>
+  </head>
+  <body>
+    <div class="container">
+      <div class="content">
+        <div class="row">
+            <%= yield %>
+        </div><!--/row-->
+      </div><!--/content-->
+    </div> <!-- /container -->
+  </body>
+</html>

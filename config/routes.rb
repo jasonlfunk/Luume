@@ -14,6 +14,8 @@ Luume::Application.routes.draw do
 
   post 'projects/:id/generate' => 'projects#generate', :as => :generate_invoice 
 
+  get 'users/status' => 'users#status', :as => :user_status
+
   resources :sessions
 
   resources :users
@@ -26,9 +28,8 @@ Luume::Application.routes.draw do
     resources :invoices
     resources :tasks do
        match 'start' => 'log#start', :as => :start
-      resources :log do
-        match 'stop' => 'log#stop', :as => :stop
-      end
+       match 'stop' => 'log#stop', :as => :stop
+      resources :logs
     end
   end
 

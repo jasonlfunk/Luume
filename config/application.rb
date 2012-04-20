@@ -56,5 +56,6 @@ module Luume
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     config.assets.paths << "#{config.root}/public/system"
+    config.log_level = :debug
   end
 end

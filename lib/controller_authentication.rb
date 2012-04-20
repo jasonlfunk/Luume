@@ -30,8 +30,15 @@ module ControllerAuthentication
 
   def login_required
     unless logged_in?
-      store_target_location
-      redirect_to login_url, :alert => "You must log in before accessing this page."
+      respond_to do |format|
+        format.html do
+          store_target_location
+          redirect_to login_url, :alert => "You must log in before accessing this page."
+        end
+        format.json do
+          render :status => 403, :json => {}
+        end
+      end
     end
   end
 

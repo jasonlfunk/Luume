@@ -10,6 +10,10 @@ class TasksController < ApplicationController
       end
     end
     @tasks = @project.tasks
+    respond_to do |format|
+        format.html 
+        format.json { render :status => 200, :json=>@tasks }
+    end
   end
   
   def new

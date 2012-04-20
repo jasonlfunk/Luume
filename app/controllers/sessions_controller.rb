@@ -6,10 +6,20 @@ class SessionsController < ApplicationController
     user = User.authenticate(params[:login], params[:password])
     if user
       session[:user_id] = user.id
-      redirect_to_target_or_default root_url, :notice => "Logged in successfully."
+      respond_to do |format|
+        format.html { redirect_to_target_or_default root_url, :notice => "Logged in successfully." }
+        format.json { render :status => 200, :json => { :user => user } }
+      end
     else
-      flash.now[:error] = "Invalid login or password."
-      render :action => 'new'
+      respond_to do |format|
+        format.html do
+          flash.now[:error] = "Invalid login or password."
+          render :action => 'new'
+        end
+        format.json do
+          render :status => 403, :json => {}
+        end
+      end
     end
   end
 

@@ -47,7 +47,7 @@
                   </td>
                   <td><%= log.actual %></td>
                   <td><%= log.billable %></td>
-                  <td><%= link_to "Stop", project_task_log_stop_path(@project,task,log), :class=>'btn btn-mini btn-danger' %></td>
+                  <td><%= link_to "Stop", project_task_stop_path(@project,task), :class=>'btn btn-mini btn-danger' %></td>
                 </tr>
               <% else %>
                   <% if log.start && log.end && log[:actual].nil? %>

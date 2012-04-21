@@ -6,23 +6,29 @@
 	<dict>
 		<key>widget.wdgt/main.js:26</key>
 		<string>-setupScreen</string>
-		<key>widget.wdgt/main.js:54</key>
+		<key>widget.wdgt/main.js:27</key>
+		<string>-setupScreen</string>
+		<key>widget.wdgt/main.js:28</key>
+		<string>-setupScreen</string>
+		<key>widget.wdgt/main.js:53</key>
+		<string>-setupScreen</string>
+		<key>widget.wdgt/main.js:55</key>
 		<string>-setupScreen</string>
 	</dict>
 	<key>CYLastWindowPosition</key>
-	<string>{614, 121}</string>
+	<string>{525, 193}</string>
 	<key>ContentSplitViewGeometry</key>
 	<dict>
 		<key>ContentSplitViewConfig</key>
-		<integer>24</integer>
+		<integer>8</integer>
 		<key>SplitViewConfig</key>
 		<integer>3</integer>
 		<key>_indexOfCollapsedView</key>
 		<integer>0</integer>
 		<key>sizes</key>
 		<array>
-			<string>{{0, 0}, {1031, 275}}</string>
-			<string>{{0, 285}, {1031, 391}}</string>
+			<string>{{0, 0}, {1031, 402}}</string>
+			<string>{{0, 412}, {1031, 264}}</string>
 		</array>
 	</dict>
 	<key>ContentViewType</key>
@@ -85,13 +91,7 @@
 			</array>
 		</array>
 		<key>Objects view last selections</key>
-		<array>
-			<array>
-				<integer>0</integer>
-				<integer>0</integer>
-				<integer>3</integer>
-			</array>
-		</array>
+		<array/>
 		<key>Opened Steps</key>
 		<array>
 			<integer>0</integer>

@@ -4,6 +4,7 @@
  according to the license.txt file included in the project.
  */
 
+//var url = "http://www.luume.com/";
 var url = "http://0.0.0.0:3000/";
 var cookie = "";
 
@@ -81,6 +82,9 @@ function handleResponse(res) {
         return null;
     } else if(res.status == 500) {
         showError("Sorry, an error occurred.");
+        return null;
+    } else {
+        showError("Something went wrong ("+res.status+")");
         return null;
     }
 }

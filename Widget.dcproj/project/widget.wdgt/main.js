@@ -4,8 +4,8 @@
  according to the license.txt file included in the project.
  */
 
-//var url = "http://www.luume.com/";
-var url = "http://0.0.0.0:3000/";
+var url = "http://www.luume.com/";
+//var url = "http://0.0.0.0:3000/";
 var cookie = "";
 
 // Function: load()

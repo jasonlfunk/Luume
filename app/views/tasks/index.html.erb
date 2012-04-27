@@ -36,8 +36,9 @@
             </tr>
           </thead>
           <tbody>
-            <% task.logs.find_all{|log| !log.invoiced}.each do |log| %>
-              <tr log_id="<%= log.id %>">
+            <% tasks = task.logs.find_all{|log| !log.invoiced} %>
+            <% tasks.each_with_index do |log,index| %>
+              <tr log_id="<%= log.id %>" <% if index > 4 %>style='display: none;'<% end %>>
                  <td>
                    <input type='checkbox' class='log-invoice' name='log[]' value='<%= log.id %>' checked='checked'/>
               <% if log.start && log.end.nil? %>
@@ -69,6 +70,13 @@
                 </tr>
               <% end %>
             <% end %>
+            <% if tasks.length > 5 %>
+              <tr class='more'>
+                <td colspan="4" style="text-align: center;">
+                  <%= link_to_function "- More Logs -", "showMoreLogs(this);" %>
+                </td>
+              </tr>
+            <% end %> 
           </tbody>
           <tfoot>
             <tr><td>Total</td><td><%= task.actual %></td><td><%= task.billable %></td><td></td></tr>

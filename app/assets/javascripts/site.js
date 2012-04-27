@@ -66,11 +66,27 @@ $(document).ready(function() {
 
 function prepareInvoice() {
   if($(".log-invoice:hidden").length != 0){
+    $("tr.more").remove();
+    $("tr:hidden").show();
     $(".page-header:first").after('<div id="pia" class="alert alert-info" style="display: none;">Select the tasks to add to the invoice and then click the \'Create Invoice\' button again.</div>');
     $("#pia").fadeIn();
     $(".log-invoice").fadeIn();
     $("body").scrollTop(0);
   }else{
     $("form").submit();
+  }
+}
+function showMoreLogs(elm) {
+  var tab = $(elm).closest("table");
+  var count = 0;
+  tab.find("tr:hidden").each(function(i,e){
+    $(e).show();
+    if(count++ == 5) {
+      return false;
+    }
+  });
+  
+  if(tab.find("tr:hidden").length == 0) {
+    tab.find("tr.more").remove();
   }
 }
